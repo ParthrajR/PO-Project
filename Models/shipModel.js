@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const venderSchema = new mongoose.Schema(
+const shipSchema = new mongoose.Schema(
   {
     companyName: {
       type: String,
@@ -36,6 +36,6 @@ const venderSchema = new mongoose.Schema(
   }
 );
 
-const Vender = mongoose.model('Vender', venderSchema);
+const Ship = mongoose.model('Ship', shipSchema);
 
-module.exports = Vender;
+module.exports = Ship;
