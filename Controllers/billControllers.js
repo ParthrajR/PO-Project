@@ -52,8 +52,8 @@ const updateBill = async (req, res) =>{
             res.status(201).json({ message: 'Bill updated successfully', updatedBill });
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Something went wrong' });
+       console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
     }
 }
 
