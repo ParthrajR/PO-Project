@@ -2,21 +2,21 @@ const Ship = require("../Models/shipModel")
 
 const createShip = async (req, res) => {
 
-    const {CompanyName, Address, GSTNo, ContactPerson, ContactNo, Email, Site} = req.body
+    const {companyName, address, gstNo, contactPerson, contactNo, email, site} = req.body
     console.log(req.body)
     try {   
-        if (!CompanyName || !Address || !GSTNo || !ContactPerson || !ContactNo || !Email || !Site) {
+        if (!companyName || !address || !gstNo || !contactPerson || !contactNo || !email || !site) {
             return res.status(400).json({ message: 'All fields are mandatory.' });
         }
         else{
             const shipRecords = new Ship({
-                companyName: CompanyName,
-                address: Address,
-                gstNo: GSTNo,
-                contactPerson: ContactPerson,
-                contactNo: ContactNo,
-                email: Email,
-                site: Site
+                companyName: companyName,
+                address: address,
+                gstNo: gstNo,
+                contactPerson: contactPerson,
+                contactNo: contactNo,
+                email: email,
+                site: site
               });
 
               await shipRecords.save();

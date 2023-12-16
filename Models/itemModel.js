@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    exectedDate: {
+    expectedDate: {
       type: String,
       required: true,
     },

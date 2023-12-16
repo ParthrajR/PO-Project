@@ -4,21 +4,21 @@ const Vender = require("../Models/venderModel")
 const createVender = async (req, res) => {
 
 
-    const {CompanyName, Address, GSTNo, ContactPerson, ContactNo, Email, site} = req.body
+    const {companyName, address, gstNo, contactPerson, contactNo, email, site} = req.body
     console.log(req.body)
     try {   
-        if (!CompanyName || !Address || !GSTNo || !ContactPerson || !ContactNo || !Email || !Site) {
+        if (!companyName || !address || !gstNo || !contactPerson || !contactNo || !email || !site) {
             return res.status(400).json({ message: 'All fields are mandatory.' });
         }
         else{
             const venderRecords = new Vender({
-                companyName: CompanyName,
-                address: Address,
-                gstNo: GSTNo,
-                contactPerson: ContactPerson,
-                contactNo: ContactNo,
-                email: Email,
-                site: Site
+                companyName: companyName,
+                address: address,
+                gstNo: gstNo,
+                contactPerson: contactPerson,
+                contactNo: contactNo,
+                email: email,
+                site: site
               });
 
               await venderRecords.save();
