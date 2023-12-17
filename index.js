@@ -5,6 +5,8 @@ const venderRoutes = require('./Routes/venderRoutes');
 const billRoutes = require('./Routes/billRoutes')
 const shipRoutes = require('./Routes/shipRoutes')
 const itemRoutes = require('./Routes/itemRoutes')
+const shipViaRoutes = require('./Routes/shipViaRoutes')
+
 const mongoose = require('mongoose');
 const url = process.env.MONGO_URL;
 
@@ -16,6 +18,7 @@ app.use('/api/vender', venderRoutes);
 app.use('/api/bill', billRoutes);
 app.use('/api/ship', shipRoutes);
 app.use('/api/item', itemRoutes);
+app.use('/api/shipVia', shipViaRoutes)
 
 
 // Connect to MongoDB using mongoose
