@@ -8,22 +8,14 @@ const itemRoutes = require('./Routes/itemRoutes');
 const shipViaRoutes = require('./Routes/shipViaRoutes');
 const cors = require('cors');
 
+
 const mongoose = require('mongoose');
 
-const port = 1210;
-
-const corsOptions = {
-  origin: 'http://localhost:1312',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
+const port = 2508;
 
 
 // Build the MongoDB connection URL
-const dbUrl = `${process.env.MONGO_URL}${process.env.DATABASE_NAME}`;
+const dbUrl = "mongodb://localhost:27017/PO-Project";
 
 // Set up the MongoDB connection
 mongoose.connect(dbUrl, {

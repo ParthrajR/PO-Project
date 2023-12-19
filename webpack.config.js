@@ -7,7 +7,7 @@ module.exports = {
         main: './index.js'
     },
     output: {
-        path: path.join(__dirname, 'prod-build'), // Output directory
+        path: path.join(__dirname, 'dist'), // Output directory
         publicPath: '/',
         filename: '[name].js', // Output bundle file name
         clean: true
@@ -18,7 +18,7 @@ module.exports = {
         rules:[
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                // exclude: /node_modules/,
                 loader: "babel-loader"
             }
         ]
