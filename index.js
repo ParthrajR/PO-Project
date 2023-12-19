@@ -13,6 +13,15 @@ const mongoose = require('mongoose');
 
 const port = 2508;
 
+const corsOptions = {
+  origin: 'http://localhost:1312',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
 
 // Build the MongoDB connection URL
 const dbUrl = "mongodb://localhost:27017/PO-Project";
