@@ -1,0 +1,4 @@
+@REM @echo off
+@REM cd F:\Freelancing\PO-Project\dist\main.js
+
+@REM start 

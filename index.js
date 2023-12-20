@@ -11,7 +11,7 @@ const cors = require('cors');
 
 const mongoose = require('mongoose');
 
-const port = 2508;
+const port = 1210;
 
 const corsOptions = {
   origin: 'http://localhost:1312',
