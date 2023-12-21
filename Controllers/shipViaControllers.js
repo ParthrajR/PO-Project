@@ -5,7 +5,7 @@ const createShipVia = async (req, res) => {
     const {shipVia, deliveryAt, shippingTerms, purchaseDate, purchaseOrderNo} = req.body
     console.log(req.body)
     try {   
-        if (!shipVia || !deliveryAt || !shippingTerms || !purchaseDate || !purchaseOrderNo) {
+        if (!shipVia || !deliveryAt || !shippingTerms) {
             return res.status(400).json({ message: 'All fields are mandatory.' });
         }
         else{

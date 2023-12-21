@@ -24,7 +24,7 @@ app.use(cors(corsOptions));
 
 
 // Build the MongoDB connection URL
-const dbUrl = "mongodb://localhost:27017/PO-Project";
+const dbUrl = "mongodb://127.0.0.1:27017/PO-Project";
 
 // Set up the MongoDB connection
 mongoose.connect(dbUrl, {
@@ -39,7 +39,7 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB successfully');
-});
+}); 
 
 // Export the Mongoose instance for use in other parts of the application
 module.exports = mongoose;

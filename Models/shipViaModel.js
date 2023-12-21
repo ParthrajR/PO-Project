@@ -16,11 +16,11 @@ const shipViaSchema = new mongoose.Schema(
     },
     purchaseDate: {
       type: String,
-      required: true,
+      required: false,
     },
     purchaseOrderNo: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {
