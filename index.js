@@ -6,6 +6,8 @@ const billRoutes = require('./Routes/billRoutes');
 const shipRoutes = require('./Routes/shipRoutes');
 const itemRoutes = require('./Routes/itemRoutes');
 const shipViaRoutes = require('./Routes/shipViaRoutes');
+const orderStatusRoutes = require('./Routes/orderStatusRoutes');
+
 const cors = require('cors');
 
 
@@ -52,6 +54,8 @@ app.use('/api/bill', billRoutes);
 app.use('/api/ship', shipRoutes);
 app.use('/api/item', itemRoutes);
 app.use('/api/shipVia', shipViaRoutes);
+app.use('/api/generate', orderStatusRoutes);
+
 
 app.get('/', (req, res) => {
   res.json({
