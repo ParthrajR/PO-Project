@@ -2,7 +2,7 @@ const Item = require("../Models/itemModel")
 
 const createItem = async (req, res) => {
 
-    const {itemCode, desc, expectedDate, qty, uom, unitPrice, disc, netRate} = req.body
+    const {itemCode, desc, expectedDate, qty, uom, unitPrice, disc, netRate, receivedMaterial, receivedDate} = req.body
     console.log(req.body)
     try {   
         if (!itemCode || !desc || !expectedDate || !qty || !uom || !unitPrice || !disc || !netRate) {
@@ -17,7 +17,9 @@ const createItem = async (req, res) => {
                 uom: uom,
                 unitPrice: unitPrice,
                 disc: disc,
-                netRate: netRate
+                netRate: netRate,
+                receivedMaterial:receivedMaterial,
+                receivedDate: receivedDate
               });
 
               await billRecords.save();

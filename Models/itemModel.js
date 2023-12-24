@@ -33,6 +33,14 @@ const itemSchema = new mongoose.Schema(
     netRate: {  
         type: String,
         required: true,
+    },
+    receivedMaterial: {  
+      type: String,
+      required: false,
+    },
+    receivedDate: {  
+      type: String,
+      required: false,
     }
   },
   {
