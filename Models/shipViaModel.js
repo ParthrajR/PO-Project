@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 
 const shipViaSchema = new mongoose.Schema(
-  {
+  { 
     shipVia: {
       type: String,
       required: true,
     },
+   
     deliveryAt: {
       type: String,
       required: true,
@@ -20,7 +21,7 @@ const shipViaSchema = new mongoose.Schema(
     },
     purchaseOrderNo: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   {

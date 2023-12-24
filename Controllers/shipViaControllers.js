@@ -1,32 +1,33 @@
 const ShipVia = require("../Models/shipViaModel")
+const { generateShipviaId } = require("../utils/generateOrderId")
 
 const createShipVia = async (req, res) => {
-
-    const {shipVia, deliveryAt, shippingTerms, purchaseDate, purchaseOrderNo} = req.body
-    console.log(req.body)
-    try {   
-        if (!shipVia || !deliveryAt || !shippingTerms) {
-            return res.status(400).json({ message: 'All fields are mandatory.' });
-        }
-        else{
-            const shipViaRecords = new ShipVia({
-                shipVia: shipVia,
-                deliveryAt: deliveryAt,
-                shippingTerms: shippingTerms,
-                purchaseDate: purchaseDate,
-                purchaseOrderNo: purchaseOrderNo,
-              });
-
-              await shipViaRecords.save();
-
-              res.status(201).json({ message: 'Order Details Created Successfully..' });
-
-        }
+    const { shipVia, deliveryAt, shippingTerms, purchaseDate } = req.body;
+  
+    try {
+      if (!shipVia || !deliveryAt || !shippingTerms) {
+        return res.status(400).json({ message: 'All fields are mandatory.' });
+      } else {
+        const purchaseOrderNo = await generateShipviaId();
+        console.log("didddddd", purchaseOrderNo)
+        const shipViaRecords = new ShipVia({
+          shipVia: shipVia,
+          deliveryAt: deliveryAt,
+          shippingTerms: shippingTerms,
+          purchaseDate: purchaseDate,
+          purchaseOrderNo: purchaseOrderNo,
+        });
+        console.log(shipViaRecords)
+  
+        await shipViaRecords.save();
+  
+        res.status(201).json({ message: 'Order Details Created Successfully.' });
+      }
     } catch (error) {
-        console.error( error);
-        res.status(500).json({ message: 'Something went wrong' });
+      console.error(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
-}
+  };
 
 const readAllShipVia = async (req, res) => {
     try {
