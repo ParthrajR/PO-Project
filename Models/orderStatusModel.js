@@ -15,23 +15,23 @@ const orderStatusSchema = new mongoose.Schema({
     required: true,
   },
   vendorId: {
-    type: String,
+    type: Object,
     required: true,
   },
   shipId: {
-    type: String,
+    type: Object,
     required: true,
   },
   orderId: {
-    type: String,
+    type: Object,
     required: true,
   },
   itemId: {
-    type: [String], // Array of item IDs
+    type: [Object], // Array of item IDs
     required: true,
   },
   billId: {
-    type: String,
+    type: Object,
     required: true,
   },
   total: {
