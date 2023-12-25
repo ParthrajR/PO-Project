@@ -1,33 +1,52 @@
 const OrderStatus = require("../Models/orderStatusModel")
+const Vender = require("../Models/venderModel")
+const Ship = require("../Models/shipModel")
+const Bill = require("../Models/billModel")
+const ShipVia = require("../Models/shipViaModel")
+const Item = require("../Models/itemModel")
+
 
 const createStatus = async (req, res) => {
-
-    const {status, purchaseOrderNumber, generateDate, vendorName, shipName, total} = req.body
+    const { status, purchaseOrderNumber, generateDate, vendorId, shipId, billId, itemId, orderId, total } = req.body;
+  
     try {
-        if (!status || !purchaseOrderNumber || !generateDate || !vendorName || !shipName || !total) {
-            return res.status(400).json({ message: 'All fields are mandatory.' });
-        }
-        else{
-            const statusRecords = new OrderStatus({
-                status: status,
-                purchaseOrderNumber: purchaseOrderNumber,
-                generateDate: generateDate,
-                vendorName: vendorName,
-                shipName: shipName,
-                total: total,
-              });
+      if (!status || !purchaseOrderNumber || !generateDate || !vendorId || !shipId || !total) {
+        return res.status(400).json({ message: 'All fields are mandatory.' });
+      }
+  
+      // Assuming _id is of type ObjectId, fetch data from the Vender collection
+      const venderData = await Vender.findById(vendorId);
+      const shipData = await Ship.findById(shipId);
+      const BillData = await Bill.findById(billId);
+      const orderData = await ShipVia.findById(orderId);
+      const itemData = await Item.find({ _id: { $in: itemId } });
 
-              await statusRecords.save();
 
-              res.status(201).json({ message: 'Details Created Successfully..' });
 
-        }
+      console.log("itemData", itemData)
+  
+      const statusRecords = new OrderStatus({
+        status: status,
+        purchaseOrderNumber: purchaseOrderNumber,
+        generateDate: generateDate,
+        vendorId: venderData,
+        shipId: shipData,
+        billId: BillData,
+        itemId: itemData,
+        orderId: orderData,
+        total: total,
+      });
+  
+      console.log(statusRecords);
+  
+      await statusRecords.save();
+  
+      res.status(201).json({ message: 'Details Created Successfully..' });
     } catch (error) {
-        console.error( error);
-        res.status(500).json({ message: 'Something went wrong' });
+      console.error(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
-
-}
+  };
 
 const updateStatus = async (req, res) =>{
     try {
@@ -48,7 +67,9 @@ const updateStatus = async (req, res) =>{
 
 const readAllOrder = async (req, res) => {
     try {
+       
         const orders = await OrderStatus.find();
+
         res.status(200).json({ status: "success", orders: orders }); 
     } catch (error) {
         console.error( error);

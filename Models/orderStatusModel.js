@@ -14,11 +14,23 @@ const orderStatusSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  vendorName: {
+  vendorId: {
     type: String,
     required: true,
   },
-  shipName: {
+  shipId: {
+    type: String,
+    required: true,
+  },
+  orderId: {
+    type: String,
+    required: true,
+  },
+  itemId: {
+    type: [String], // Array of item IDs
+    required: true,
+  },
+  billId: {
     type: String,
     required: true,
   },
