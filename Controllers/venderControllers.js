@@ -34,7 +34,7 @@ const createVender = async (req, res) => {
 
 const readAllVender = async (req, res) => {
     try {
-        const venders = await Vender.find();
+        const venders = await Vender.find().sort({ createdAt: -1 });
         res.status(200).json({ status: "success", venders: venders }); 
     } catch (error) {
         console.error( error);

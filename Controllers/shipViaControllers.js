@@ -31,7 +31,7 @@ const createShipVia = async (req, res) => {
 
 const readAllShipVia = async (req, res) => {
     try {
-        const ships = await ShipVia.find();
+        const ships = await ShipVia.find().sort({ createdAt: -1 });
         res.status(200).json({ status: "success", ships: ships }); 
     } catch (error) {
         console.error( error);

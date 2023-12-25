@@ -5,7 +5,7 @@ const Bill = require("../Models/billModel")
 const ShipVia = require("../Models/shipViaModel")
 const Item = require("../Models/itemModel")
 
-const { ObjectId } = require('mongoose').Types;
+// const { ObjectId } = require('mongoose').Types;
 
 
 const createStatus = async (req, res) => {
@@ -15,7 +15,6 @@ const createStatus = async (req, res) => {
         if (!status || !purchaseOrderNumber || !generateDate || !vendorId || !shipId || !total) {
             return res.status(400).json({ message: 'All fields are mandatory.' });
         }
-
         // Assuming _id is of type ObjectId, fetch data from the Vender collection
         const venderData = await Vender.findById(vendorId);
         const shipData = await Ship.findById(shipId);
@@ -62,9 +61,6 @@ const createStatus = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
-
-
-
 
 const updateStatus = async (req, res) => {
     try {
@@ -122,10 +118,15 @@ const updateStatus = async (req, res) => {
 
 
 
+
+
+
+
+
 const readAllOrder = async (req, res) => {
     try {
-       
-        const orders = await OrderStatus.find();
+
+        const orders = await OrderStatus.find().sort({ createdAt: -1 });
 
         res.status(200).json({ status: "success", orders: orders }); 
     } catch (error) {

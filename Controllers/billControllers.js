@@ -32,13 +32,14 @@ const createBill = async (req, res) => {
 
 const readAllBill = async (req, res) => {
     try {
-        const bills = await Bill.find();
+        const bills = await Bill.find().sort({ createdAt: -1 });
         res.status(200).json({ status: "success", bills: bills }); 
     } catch (error) {
-        console.error( error);
+        console.error(error);
         res.status(500).json({ message: 'Something went wrong' });  
     }
 }
+
 
 const updateBill = async (req, res) =>{
     try {

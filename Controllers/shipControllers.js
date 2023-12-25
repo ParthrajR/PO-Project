@@ -32,7 +32,7 @@ const createShip = async (req, res) => {
 
 const readAllShip = async (req, res) => {
     try {
-        const ships = await Ship.find();
+        const ships = await Ship.find().sort({ createdAt: -1 });
         res.status(200).json({ status: "success", ships: ships }); 
     } catch (error) {
         console.error( error);
