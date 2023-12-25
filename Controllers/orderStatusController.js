@@ -22,7 +22,6 @@ const createStatus = async (req, res) => {
       const itemData = await Item.find({ _id: { $in: itemId } });
 
 
-
       console.log("itemData", itemData)
   
       const statusRecords = new OrderStatus({
@@ -48,22 +47,58 @@ const createStatus = async (req, res) => {
     }
   };
 
-const updateStatus = async (req, res) =>{
+  const updateStatus = async (req, res) => {
     try {
-        const id = req.params.id;
-        const orderExist = await OrderStatus.findOne({_id:id})
-        if(!orderExist){
+        const orderId = req.params.id;
+        const { status, item } = req.body;
+
+        // Update OrderStatus
+        const orderExist = await OrderStatus.findOne({ _id: orderId });
+        if (!orderExist) {
             return res.status(404).json({ message: 'Order not found' });
-        }
-        else{
-            const updatedOrder = await OrderStatus.findByIdAndUpdate(id, req.body)
-            res.status(201).json({ message: 'Order status updated successfully' });
+        } else {
+            const updatedOrder = await OrderStatus.findByIdAndUpdate(orderId, {
+                status,
+                $set: { // Update the fields in the orderStatus model
+                    receivedMaterial: item.map((singleItem) => singleItem.receivedMaterial),
+                    receivedDate: item.map((singleItem) => singleItem.receivedDate),
+                },
+            }, { new: true });
+
+            // Update each item in the array
+            for (const singleItem of item) {
+                const itemId = singleItem.itemId;
+                const material = singleItem.receivedMaterial;
+                const date = singleItem.receivedDate;
+
+                console.log("Updating item:", itemId, material, date);
+
+                const itemExist = await Item.findOne({ _id: itemId });
+
+                if (!itemExist) {
+                    console.log(`Item ${itemId} not found`);
+                    // Handle the case where the item is not found
+                } else {
+                    // Update the item with receivedMaterial and receivedDate
+                    // await OrderStatus.findByIdAndUpdate(itemId, { receivedMaterial: material, receivedDate: date });
+                    const updatedItem = await Item.findByIdAndUpdate(itemId, { receivedMaterial: material, receivedDate: date });
+                    // const orders = await OrderStatus.find();
+
+                    console.log(`Item ${itemId} updated successfully`);
+                }
+            }
+
+            res.status(201).json({ message: 'Order status and Item details updated successfully' });
         }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Something went wrong' });
     }
-}
+};
+
+
+
+
 
 const readAllOrder = async (req, res) => {
     try {
