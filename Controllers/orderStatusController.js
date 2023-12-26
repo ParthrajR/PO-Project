@@ -55,7 +55,7 @@ const createStatus = async (req, res) => {
 
         await statusRecords.save();
 
-        res.status(201).json({ message: 'Details Created Successfully..' });
+        res.status(201).json({ message: 'Details Created Successfully..', statusRecords });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Something went wrong' });
@@ -137,8 +137,7 @@ const updateStatus = async (req, res) => {
 const readAllOrder = async (req, res) => {
     try {
 
-        const orders = await OrderStatus.find().sort({ createdAt: -1 });
-
+        const orders = await OrderStatus.find();
         res.status(200).json({ status: "success", orders: orders }); 
     } catch (error) {
         console.error( error);
