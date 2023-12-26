@@ -86,7 +86,7 @@ const updateStatus = async (req, res) => {
 
             // Update each item in the array
             for (const singleItem of item) {
-                const itemId = singleItem.itemId;
+                const itemId = singleItem._id;
                 const material = singleItem.receivedMaterial;
                 const date = singleItem.receivedDate;
 
