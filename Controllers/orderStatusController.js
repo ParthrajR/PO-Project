@@ -101,6 +101,16 @@ const updateStatus = async (req, res) => {
                     // Update the item with receivedMaterial and receivedDate
                     const updatedItem = await Item.findByIdAndUpdate(itemId, { receivedMaterial: material, receivedDate: date });
                     console.log(`Item ${itemId} updated successfully`);
+
+                    const updateStatus = await OrderStatus.findOne({ _id: orderId })
+                    console.log(updateStatus)
+                    const itemData = await Item.find({ _id: { $in: updateStatus.itemId } });
+                    console.log("uuuuuuuu", itemData)
+                    const upDateStatus = await OrderStatus.findOneAndUpdate(
+                        {_id: orderId},
+                        {$set : {itemId: itemData}}
+                    )
+                    console.log("updateDaataaaaa", upDateStatus)
                 }
             }
 
@@ -111,6 +121,7 @@ const updateStatus = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 };
+
 
 
 
