@@ -110,6 +110,7 @@ const updateStatus = async (req, res) => {
                         {_id: orderId},
                         {$set : {itemId: itemData}}
                     )
+                    await Item.findByIdAndUpdate(itemId, { receivedMaterial: " ", receivedDate: " " });
                     console.log("updateDaataaaaa", upDateStatus)
                 }
             }
