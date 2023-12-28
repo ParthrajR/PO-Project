@@ -89,11 +89,11 @@ const updateStatus = async (req, res) => {
                 const itemId = singleItem._id;
                 const material = singleItem.receivedMaterial;
                 const date = singleItem.receivedDate;
-
+            
                 console.log("Updating item:", itemId, material, date);
-
+            
                 const itemExist = await Item.findOne({ _id: itemId });
-
+            
                 if (!itemExist) {
                     console.log(`Item ${itemId} not found`);
                     // Handle the case where the item is not found
@@ -101,19 +101,26 @@ const updateStatus = async (req, res) => {
                     // Update the item with receivedMaterial and receivedDate
                     const updatedItem = await Item.findByIdAndUpdate(itemId, { receivedMaterial: material, receivedDate: date });
                     console.log(`Item ${itemId} updated successfully`);
+                    const updatedItemData = await Item.find({ _id: { $in: item.map(item => item._id) } });
+                    
 
-                    const updateStatus = await OrderStatus.findOne({ _id: orderId })
-                    console.log(updateStatus)
-                    const itemData = await Item.find({ _id: { $in: updateStatus.itemId } });
-                    console.log("uuuuuuuu", itemData)
-                    const upDateStatus = await OrderStatus.findOneAndUpdate(
-                        {_id: orderId},
-                        {$set : {itemId: itemData}}
-                    )
-                    await Item.findByIdAndUpdate(itemId, { receivedMaterial: " ", receivedDate: " " });
-                    console.log("updateDaataaaaa", upDateStatus)
+                    // Update the OrderStatus with the updated itemData
+                    const upDateStatus = await OrderStatus.findByIdAndUpdate(
+                        { _id: orderId },
+                        { $set: { itemId: updatedItemData } }
+                    );
+            
+                    console.log("Updated OrderStatus:", upDateStatus);
+            
+                    // If you want to clear receivedMaterial and receivedDate after updating OrderStatus
+                   
                 }
             }
+
+            await Item.updateMany(
+                { _id: { $in: item.map(item => item._id) } },
+                { $set: { receivedMaterial: "", receivedDate: "" } }
+            );
 
             res.status(201).json({ message: 'Order status and Item details updated successfully' });
         }
