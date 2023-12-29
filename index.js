@@ -7,9 +7,10 @@ const shipRoutes = require('./Routes/shipRoutes');
 const itemRoutes = require('./Routes/itemRoutes');
 const shipViaRoutes = require('./Routes/shipViaRoutes');
 const orderStatusRoutes = require('./Routes/orderStatusRoutes');
+const mailRoutes = require('./Routes/mailRoutes');
+
 
 const cors = require('cors');
-
 
 const mongoose = require('mongoose');
 
@@ -55,6 +56,7 @@ app.use('/api/ship', shipRoutes);
 app.use('/api/item', itemRoutes);
 app.use('/api/shipVia', shipViaRoutes);
 app.use('/api/generate', orderStatusRoutes);
+app.use('/api/mail', mailRoutes);
 
 
 app.get('/', (req, res) => {
