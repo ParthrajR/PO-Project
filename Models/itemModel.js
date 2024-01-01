@@ -22,14 +22,6 @@ const itemSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    unitPrice: {
-      type: String,
-      required: true,
-    },
-    disc: {  
-      type: String,
-      required: true,
-    },
     netRate: {  
         type: String,
         required: true,

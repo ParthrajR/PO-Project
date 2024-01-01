@@ -23,6 +23,18 @@ const shipViaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    CGST: {
+      type: Number,
+      required: true,
+    },
+    SGST: {
+      type: Number,
+      required: true,
+    },
+    IGST: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt timestamps

@@ -2,30 +2,52 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 const express = require('express');
 const app = express();
+const path = require('path');
+const fs = require('fs/promises'); // Using fs.promises for async file operations
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+// const transporter = nodemailer.createTransport({
+//     // service: "Gmail",
+//     // auth: {
+//     //     user: 'parthraj.rathod2508@gmail.com',
+//     //     pass: 'npmn eyst uxdc whvk'
+//     // },
+//     // // port: 587,
+//     // // secure: true, // use TLS
+//     // // requireTLS: true, // require TLS
+//     // // tls: {
+//     // //   rejectUnauthorized: false, // ignore unauthorized TLS errors for testing only
+//     // // },
+
+    
+// });
+
 const transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: 'smtp.ethereal.email',
+    port: 587,
     auth: {
-        user: 'parthrajrathod1998@gmail.com',
-        pass: 'bbyv zmqp vrpp itfr'
-    },
+        user: 'susanna.mueller74@ethereal.email',
+        pass: 'a8e3EB2jQ2Y9t2gfFa'
+    }
 });
 
 const sendEmail = async (req, res) => {
     try {
         const { to, subject, file } = req.body;
-
+        console.log("file Type", req)
         const pdfBuffer = req.file.buffer;
 
-        console.log("pdfbufffff", pdfBuffer)
-        // Convert the attachment to base64
-        // const base64Pdf = Buffer.from(attachment, 'binary').toString('base64');
+        // console.log('Received PDF:', pdfBuffer.toString('base64'));
+
+        // console.log("pdfbufffff", pdfBuffer)
+        // // Convert the attachment to base64
+        // // const base64Pdf = Buffer.from(attachment, 'binary').toString('base6
 
         const mailOptions = {
-            from: "shreeganeshpob@gmail.com",
+            // from: "shreeganeshpob@gmail.com",
+            from: "parthraj.rathod2508@gmail.com",
             to,
             subject,
             attachments: [

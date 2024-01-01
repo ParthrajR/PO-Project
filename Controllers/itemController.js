@@ -2,10 +2,10 @@ const Item = require("../Models/itemModel")
 
 const createItem = async (req, res) => {
 
-    const {itemCode, desc, expectedDate, qty, uom, unitPrice, disc, netRate, receivedMaterial, receivedDate} = req.body
+    const {itemCode, desc, expectedDate, qty, uom, netRate, receivedMaterial, receivedDate} = req.body
     console.log(req.body)
     try {   
-        if (!itemCode || !desc || !expectedDate || !qty || !uom || !unitPrice || !disc || !netRate) {
+        if (!itemCode || !desc || !expectedDate || !qty || !uom || !netRate) {
             return res.status(400).json({ message: 'All fields are mandatory.' });
         }
         else{
@@ -15,8 +15,6 @@ const createItem = async (req, res) => {
                 expectedDate: expectedDate,
                 qty: qty,
                 uom: uom,
-                unitPrice: unitPrice,
-                disc: disc,
                 netRate: netRate,
                 receivedMaterial:receivedMaterial,
                 receivedDate: receivedDate
