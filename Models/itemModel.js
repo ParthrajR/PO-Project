@@ -26,6 +26,10 @@ const itemSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
+    total: {
+      type: String,
+      required: true,
+    },
     receivedMaterial: {  
       type: String,
       required: false,
