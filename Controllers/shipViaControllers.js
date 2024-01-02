@@ -5,7 +5,7 @@ const createShipVia = async (req, res) => {
     const { shipVia, deliveryAt, shippingTerms, purchaseDate, CGST, SGST, IGST } = req.body;
     console.log("cscscsc", req.body)
     try {
-      if (!shipVia || !deliveryAt || !shippingTerms || !CGST || !CGST || !CGST) {
+      if (!shipVia || !deliveryAt || !shippingTerms || !CGST || !SGST || !IGST) {
         return res.status(400).json({ message: 'All fields are mandatory.' });
       } else {
         const purchaseOrderNo = await generateShipviaId();
